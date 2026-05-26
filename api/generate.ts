@@ -1,8 +1,11 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+// 優先載入本地開發的 .env.local，若無則回退載入 .env
+dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 // SYSTEM INSTRUCTIONS: 設定 AI 的行為與輸出格式
 const SYSTEM_INSTRUCTION = `
